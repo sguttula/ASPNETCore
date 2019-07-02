@@ -1,0 +1,11 @@
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=ecst-csproj2.calstatela.edu,6301;Database=cs4540stu31;User ID=cs4540stu31;Password=abcd;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}
