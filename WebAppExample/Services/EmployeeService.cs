@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using WebAppExample.Models;
 
 namespace WebAppExample.Services
@@ -11,19 +12,39 @@ namespace WebAppExample.Services
         Employee GetEmployee(int id);
     }
 
+    public class EmployeeService : IEmployeeService
+    {
+        private readonly AppDbContext db;
+
+        public EmployeeService(AppDbContext db)
+        {
+            this.db = db;
+        }
+
+        public List<Employee> GetEmployees()
+        {
+            return db.Employees.Include(e => e.Supervisor).OrderBy(e => e.EmployeeId).ToList();
+        }
+
+        public Employee GetEmployee(int id)
+        {
+            return db.Employees.Where(e => e.EmployeeId == id).Include(e => e.Supervisor).SingleOrDefault();
+        }
+    }
+
     public class MockEmployeeService : IEmployeeService
     {
         private Employee[] employees =
         {
             new Employee
             {
-                Id = 1,
+                EmployeeId = 1,
                 Name = "John",
                 DateHired = new DateTime(2015, 1, 10)
             },
             new Employee
             {
-                Id = 2,
+                EmployeeId = 2,
                 Name = "Jane",
                 DateHired = new DateTime(2015, 2, 20),
                 SupervisorId = 1

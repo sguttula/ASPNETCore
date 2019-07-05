@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAppExample.Models
 {
     public class Employee
     {
-        public int Id { get; set; }
+        public int EmployeeId { get; set; }
         public string Name { get; set; }
         public DateTime DateHired { get; set; }
 
@@ -17,21 +16,22 @@ namespace WebAppExample.Models
 
     public class Project
     {
-        public int Id { get; set; }
+        public int ProjectId { get; set; }
         public string Name { get; set; }
 
-        public int LeaderId { get; set; }
+        public int? LeaderId { get; set; }
         public Employee Leader { get; set; }
 
         public List<ProjectMember> Members { get; set; }
     }
 
+    [Table("ProjectMembers")]
     public class ProjectMember
     {
         public int ProjectId { get; set; }
         public Project Project { get; set; }
 
         public int MemberId { get; set; }
-        public List<Employee> Members { get; set; }
+        public Employee Member { get; set; }
     }
 }
