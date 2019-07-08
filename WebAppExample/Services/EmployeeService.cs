@@ -10,6 +10,8 @@ namespace WebAppExample.Services
     {
         List<Employee> GetEmployees();
         Employee GetEmployee(int id);
+        void AddEmployee(Employee employee);
+        void UpdateEmployee(Employee update);
     }
 
     public class EmployeeService : IEmployeeService
@@ -30,35 +32,66 @@ namespace WebAppExample.Services
         {
             return db.Employees.Where(e => e.EmployeeId == id).Include(e => e.Supervisor).SingleOrDefault();
         }
+
+        public void AddEmployee(Employee employee)
+        {
+            db.Employees.Add(employee);
+            db.SaveChanges();
+        }
+
+        public void UpdateEmployee(Employee update)
+        {
+            Employee employee = db.Employees.Find(update.EmployeeId);
+            employee.Name = update.Name;
+            employee.DateHired = update.DateHired;
+            db.SaveChanges();
+        }
     }
 
     public class MockEmployeeService : IEmployeeService
     {
-        private Employee[] employees =
+        private List<Employee> employees = new List<Employee>();
+
+        public MockEmployeeService()
         {
-            new Employee
+            var john = new Employee
             {
                 EmployeeId = 1,
                 Name = "John",
                 DateHired = new DateTime(2015, 1, 10)
-            },
-            new Employee
+            };
+            var jane = new Employee
             {
                 EmployeeId = 2,
                 Name = "Jane",
                 DateHired = new DateTime(2015, 2, 20),
-                SupervisorId = 1
-            }
-        };
+                SupervisorId = 1,
+                Supervisor = john
+            };
+            employees.Add(john);
+            employees.Add(jane);
+        }
 
         public List<Employee> GetEmployees()
         {
-            return employees.ToList();
+            return employees;
         }
 
         public Employee GetEmployee(int id)
         {
             return employees[id - 1];
+        }
+
+        public void AddEmployee(Employee employee)
+        {
+            employees.Add(employee);
+        }
+
+        public void UpdateEmployee(Employee update)
+        {
+            var employee = GetEmployee(update.EmployeeId);
+            employee.Name = update.Name;
+            employee.DateHired = update.DateHired;
         }
     }
 }
