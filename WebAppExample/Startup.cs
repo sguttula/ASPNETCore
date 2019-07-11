@@ -40,6 +40,14 @@ namespace WebAppExample
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
+                    name: "wiki",
+                    template: "wiki/{**path}",
+                    defaults: new { controller = "Wiki", action = "Index" }
+                    );
+                routes.MapRoute(
+                    name: "two-employees",
+                    template: "{controller}/{action}/{id1}-{id2}");
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });

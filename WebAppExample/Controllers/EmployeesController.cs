@@ -15,7 +15,17 @@ namespace WebAppExample.Controllers
 
         public IActionResult List()
         {
-            return View(employeeService.GetEmployees());
+            var employees = employeeService.GetEmployees();
+            ViewData["employees1"] = employees;
+            ViewBag.employees2 = employees;
+            return View(employees);
+        }
+
+        public IActionResult Two(int id1, int id2)
+        {
+            var employee1 = employeeService.GetEmployee(id1);
+            var employee2 = employeeService.GetEmployee(id2);
+            return View((employee1, employee2));
         }
 
         public IActionResult View(int id)

@@ -26,4 +26,76 @@
   </tbody>
 </table>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Date Hired</th>
+      <th>Supervisor</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var employee in (List<Employee>) ViewData["employees1"])
+    {
+      <tr>
+        <td>@employee.EmployeeId</td>
+        <td><a href="View/@employee.EmployeeId">@employee.Name</a></td>
+        <td>@employee.DateHired</td>
+        <td>@employee.Supervisor?.Name</td>
+        <td><a href="Edit/@employee.EmployeeId">Edit</a></td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Date Hired</th>
+      <th>Supervisor</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var employee in ViewBag.employees1)
+    {
+      <tr>
+        <td>@employee.EmployeeId</td>
+        <td><a href="View/@employee.EmployeeId">@employee.Name</a></td>
+        <td>@employee.DateHired</td>
+        <td>@employee.Supervisor?.Name</td>
+        <td><a href="Edit/@employee.EmployeeId">Edit</a></td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Date Hired</th>
+      <th>Supervisor</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var employee in ViewBag.employees2)
+    {
+      <tr>
+        <td>@employee.EmployeeId</td>
+        <td><a href="View/@employee.EmployeeId">@employee.Name</a></td>
+        <td>@employee.DateHired</td>
+        <td>@employee.Supervisor?.Name</td>
+        <td><a href="Edit/@employee.EmployeeId">Edit</a></td>
+      </tr>
+    }
+  </tbody>
+</table>
+
 <p><a href="Add">Add Employee</a></p>
