@@ -44,6 +44,7 @@ namespace WebAppExample.Services
             Employee employee = db.Employees.Find(update.EmployeeId);
             employee.Name = update.Name;
             employee.DateHired = update.DateHired;
+            employee.SupervisorId = update.SupervisorId;
             db.SaveChanges();
         }
     }

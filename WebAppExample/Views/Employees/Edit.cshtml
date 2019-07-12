@@ -2,8 +2,12 @@
 
 <h1>Edit Employee</h1>
 
-<form method="post">
-  Name: <input type="text" name="Name" value="@Model.Name"><br>
-  Date Hired: <input type="date" name="DateHired" value="@Model.DateHired"><br>
+<form asp-controller="Employees" asp-action="Edit">
+  <label asp-for="Name"></label>: <input asp-for="Name"><br>
+  <label asp-for="DateHired">Date Hired</label>: <input asp-for="DateHired"><br>
+  <label asp-for="SupervisorId">Supervisor</label>:
+    <select asp-for="SupervisorId" asp-items="ViewBag.Supervisors">
+      <option value="">-</option>
+    </select>
   <button>Save</button>
 </form>

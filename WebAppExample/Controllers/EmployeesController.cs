@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using WebAppExample.Models;
 using WebAppExample.Services;
 
@@ -49,6 +51,13 @@ namespace WebAppExample.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
+            ViewBag.Supervisors = employeeService.GetEmployees()
+                .Where(e => e.EmployeeId != id)
+                .Select(e => new SelectListItem
+                {
+                    Value = e.EmployeeId.ToString(),
+                    Text = e.Name
+                }).ToList();
             return View(employeeService.GetEmployee(id));
         }
 
