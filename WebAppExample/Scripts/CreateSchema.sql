@@ -14,7 +14,11 @@ CREATE TABLE [Employees] (
     [Name] nvarchar(max) NULL,
     [DateHired] datetime2 NOT NULL,
     [SupervisorId] int NULL,
+    [Username] nvarchar(450) NOT NULL,
+    [Password] nvarchar(max) NOT NULL,
+    [IsAdmin] bit NOT NULL DEFAULT 0,
     CONSTRAINT [PK_Employees] PRIMARY KEY ([EmployeeId]),
+    CONSTRAINT [AK_Employees_Username] UNIQUE ([Username]),
     CONSTRAINT [FK_Employees_Employees_SupervisorId] FOREIGN KEY ([SupervisorId]) REFERENCES [Employees] ([EmployeeId]) ON DELETE NO ACTION
 );
 
@@ -53,7 +57,7 @@ CREATE INDEX [IX_Projects_LeaderId] ON [Projects] ([LeaderId]);
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20190705160311_InitialSchema', N'2.2.1-servicing-10028');
+VALUES (N'20190713223623_InitialSchema', N'2.2.1-servicing-10028');
 
 GO
 

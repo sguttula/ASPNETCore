@@ -12,6 +12,8 @@ namespace WebAppExample.Services
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Employee>().HasAlternateKey(e => e.Username);
+            modelBuilder.Entity<Employee>().Property(e => e.IsAdmin).HasDefaultValue(false);
             modelBuilder.Entity<ProjectMember>().HasKey(m => new { m.ProjectId, m.MemberId });
         }
     }

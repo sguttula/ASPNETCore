@@ -44,6 +44,8 @@ namespace WebAppExample.Controllers
         [HttpPost]
         public IActionResult Add(Employee employee)
         {
+            employee.Username = employee.Name;
+            employee.Password = "abcd";
             employeeService.AddEmployee(employee);
             return RedirectToAction(nameof(List));
         }
