@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebAppExample.Models;
@@ -15,6 +16,7 @@ namespace WebAppExample.Controllers
             this.employeeService = employeeService;
         }
 
+        [Authorize]
         public IActionResult List()
         {
             var employees = employeeService.GetEmployees();

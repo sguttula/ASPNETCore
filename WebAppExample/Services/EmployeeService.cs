@@ -10,6 +10,7 @@ namespace WebAppExample.Services
     {
         List<Employee> GetEmployees();
         Employee GetEmployee(int id);
+        Employee GetEmployee(string username);
         void AddEmployee(Employee employee);
         void UpdateEmployee(Employee update);
     }
@@ -31,6 +32,11 @@ namespace WebAppExample.Services
         public Employee GetEmployee(int id)
         {
             return db.Employees.Where(e => e.EmployeeId == id).Include(e => e.Supervisor).SingleOrDefault();
+        }
+
+        public Employee GetEmployee(string username)
+        {
+            return db.Employees.Where(e => e.Username.ToUpper() == username.ToUpper()).SingleOrDefault();
         }
 
         public void AddEmployee(Employee employee)
@@ -81,6 +87,14 @@ namespace WebAppExample.Services
         public Employee GetEmployee(int id)
         {
             return employees[id - 1];
+        }
+
+        public Employee GetEmployee(string username)
+        {
+            foreach (var employee in employees)
+                if (employee.Username.ToUpper() == username.ToUpper())
+                    return employee;
+            return null;
         }
 
         public void AddEmployee(Employee employee)
