@@ -40,7 +40,7 @@ namespace WebAppExample.Models
         public int ProjectId { get; set; }
         public Project Project { get; set; }
 
-        public int MemberId { get; set; }
-        public Employee Member { get; set; }
+        public int EmployeeId { get; set; }
+        public Employee Employee { get; set; }
     }
 }

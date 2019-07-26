@@ -1,0 +1,48 @@
+﻿@model Project
+
+<h1>View Project</h1>
+
+<table class="table">
+  <tr>
+    <th>Id</th>
+    <td>@Model.ProjectId</td>
+  </tr>
+  <tr>
+    <th>Name</th>
+    <td>@Model.Name</td>
+  </tr>
+  <tr>
+    <th>Leader</th>
+    <td>@Model.Leader?.Name</td>
+  </tr>
+  <tr>
+    <th>Members</th>
+    <td>
+      <ul>
+        @foreach(var member in Model.Members)
+        {
+          <li>@member.Employee.Name <button data-employee-id="@member.Employee.EmployeeId">Remove</button></li>
+        }
+      </ul>
+    </td>
+  </tr>
+</table>
+
+@section  Scripts{ 
+<script>
+  $(function () {
+    $("button").click(function () {
+      var projectId = @Model.ProjectId;
+      var employeeId = $(this).attr("data-employee-id");
+      var parent = $(this).parent();
+      $.ajax({
+        url: "/api/projects/" + projectId + "/members/" + employeeId,
+        method: "delete",
+        success: function () {
+          parent.remove();
+        }
+      });
+    });
+  });
+</script>
+}

@@ -36,9 +36,9 @@ GO
 
 CREATE TABLE [ProjectMembers] (
     [ProjectId] int NOT NULL,
-    [MemberId] int NOT NULL,
-    CONSTRAINT [PK_ProjectMembers] PRIMARY KEY ([ProjectId], [MemberId]),
-    CONSTRAINT [FK_ProjectMembers_Employees_MemberId] FOREIGN KEY ([MemberId]) REFERENCES [Employees] ([EmployeeId]) ON DELETE CASCADE,
+    [EmployeeId] int NOT NULL,
+    CONSTRAINT [PK_ProjectMembers] PRIMARY KEY ([ProjectId], [EmployeeId]),
+    CONSTRAINT [FK_ProjectMembers_Employees_EmployeeId] FOREIGN KEY ([EmployeeId]) REFERENCES [Employees] ([EmployeeId]) ON DELETE CASCADE,
     CONSTRAINT [FK_ProjectMembers_Projects_ProjectId] FOREIGN KEY ([ProjectId]) REFERENCES [Projects] ([ProjectId]) ON DELETE CASCADE
 );
 
@@ -48,7 +48,7 @@ CREATE INDEX [IX_Employees_SupervisorId] ON [Employees] ([SupervisorId]);
 
 GO
 
-CREATE INDEX [IX_ProjectMembers_MemberId] ON [ProjectMembers] ([MemberId]);
+CREATE INDEX [IX_ProjectMembers_EmployeeId] ON [ProjectMembers] ([EmployeeId]);
 
 GO
 
@@ -57,7 +57,7 @@ CREATE INDEX [IX_Projects_LeaderId] ON [Projects] ([LeaderId]);
 GO
 
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20190713223623_InitialSchema', N'2.2.1-servicing-10028');
+VALUES (N'20190726011148_InitialSchema', N'2.2.1-servicing-10028');
 
 GO
 

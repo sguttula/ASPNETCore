@@ -1,0 +1,23 @@
+﻿@model List<Project>
+
+<h1>Projects</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Leader</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach (var project in Model)
+    {
+      <tr>
+        <td>@project.ProjectId</td>
+        <td><a asp-action="View" asp-route-id="@project.ProjectId">@project.Name</a></td>
+        <td>@project.Leader?.Name</td>
+      </tr>
+    }
+  </tbody>
+</table>
